@@ -9,7 +9,7 @@ int main(int argc, char* argv[])
         return -1;
     }
 
-    SDL_Window *window = SDL_CreateWindow("Game",
+    SDL_Window *window = SDL_CreateWindow("Game Name",
                                           SDL_WINDOWPOS_CENTERED,
                                           SDL_WINDOWPOS_CENTERED,
                                           680, 480,
