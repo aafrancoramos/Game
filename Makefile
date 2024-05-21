@@ -1,19 +1,21 @@
 # Compiler and flags
 CXX = g++
-CXXFLAGS = -std=c++17
+CXXFLAGS = -std=c++17 -Iheaders -Iinclude `sdl2-config --cflags`
+# Linker flags
+LDFLAGS = `sdl2-config --libs` -lSDL2_image -lSDL2main
 
 # Detect the OS
 ifeq ($(OS),Windows_NT)
     SDL2_CFLAGS = `sdl2-config --cflags`
-    SDL2_LIBS = `sdl2-config --libs`
-    TARGET = sdl2-program.exe
+    SDL2_LIBS = `sdl2-config --libs` -lSDL2main -lSDL2_image
+    TARGET = build/sdl2-program.exe
     RM = del
 else
     UNAME_S := $(shell uname -s)
     ifeq ($(UNAME_S),Darwin)
         SDL2_CFLAGS = `sdl2-config --cflags`
-        SDL2_LIBS = `sdl2-config --libs`
-        TARGET = sdl2-program
+        SDL2_LIBS = `sdl2-config --libs` -lSDL2main -lSDL2_image
+        TARGET = build/sdl2-program
         RM = rm -f
     else
         $(error Unsupported OS: $(UNAME_S))
@@ -21,9 +23,7 @@ else
 endif
 
 # Source files
-SRCS = main.cpp
-
-# Object files
+SRCS = $(wildcard src/*.cpp)
 OBJS = $(SRCS:.cpp=.o)
 
 # Default rule to build the target

@@ -9,7 +9,7 @@ entity::~entity(){
 };
 
 void entity::init(SDL_Renderer *renderer, int x, int y){
-    _texture = IMG_LoadTexture(renderer, "./res/gragas.png");
+    _texture = IMG_LoadTexture(renderer, "./assets/gragas.png");
 
     if(_texture == NULL){
         std::cout << "Could not open file." << std::endl;
